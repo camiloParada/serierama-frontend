@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { CatalogComponent } from './catalog.component';
 import { CatalogService } from './catalog.service';
@@ -31,7 +32,8 @@ import { CatalogService } from './catalog.service';
     MatIconModule,
     FormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDialogModule,
   ],
   providers: [BreakpointObserver, CatalogService],
 })

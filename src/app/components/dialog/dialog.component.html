@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>What did you think of the movie?</h1>
+<div mat-dialog-content class="sr--dialog-wrapper">
+  <p>Rate the movie</p>
+  <mat-form-field class="sr--dialog-field-wrapper">
+    <mat-label class="sr--dialog-label">Rating</mat-label>
+    <input type="number" min="1" max="10" matInput class="sr--dialog-input" [(ngModel)]="data.rating">
+  </mat-form-field>
+  <mat-form-field class="sr--dialog-field-wrapper">
+    <mat-label class="sr--dialog-label">Tell us more about the movie</mat-label>
+    <textarea matInput class="sr--dialog-input" [(ngModel)]="data.note"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions class="sr--dialog-btn-wrapper">
+  <button mat-button class="sr--dialog-btn" (click)="onNoClick()">Maybe later</button>
+  <button mat-button class="sr--dialog-btn" [mat-dialog-close]="{ rating: data.rating, note: data.note}" cdkFocusInitial>Ok</button>
+</div>

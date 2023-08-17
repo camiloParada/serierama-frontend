@@ -1,10 +1,19 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
     <div class="sr--header-title-wrapper">
-      <h1>Serierama</h1>
-      <button mat-stroked-button class="sr--login-btn">
+      <h1 [routerLink]="['']">Serierama</h1>
+      <button mat-stroked-button class="sr--login-btn" [routerLink]="['/login']" *ngIf="!currentUser; else userPanel">
         Login
       </button>
+
+      <ng-template #userPanel>
+        <span class="sr--user-panel">
+          <span [matMenuTriggerFor]="logoutBtn">Welcome, {{ currentUser.fullname }}</span>
+          <mat-menu #logoutBtn="matMenu" class="sr--panel-floating">
+            <button mat-menu-item (click)="logout()">Logout</button>
+          </mat-menu>
+        </span>
+      </ng-template>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

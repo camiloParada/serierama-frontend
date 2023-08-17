@@ -1,11 +1,15 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
 import { CatalogService } from './catalog.service';
 import { Movie } from 'src/common/interfaces/movie.interface';
 import { MovieResponse } from 'src/common/interfaces/movie-response.interface';
 import { environment } from 'src/environments/environment';
+import { User } from 'src/common/interfaces/user.interface';
+import { DialogComponent } from '../components/dialog/dialog.component';
+import { DialogData } from 'src/common/interfaces/dialog-data.interface';
 
 @Component({
   selector: 'app-catalog',
@@ -14,6 +18,8 @@ import { environment } from 'src/environments/environment';
   encapsulation: ViewEncapsulation.None,
 })
 export class CatalogComponent implements OnInit {
+  @Input() currentUser!: User;
+
   public cols: number = 0;
   public imageUrl: string;
   public movies: Movie[];
@@ -22,19 +28,10 @@ export class CatalogComponent implements OnInit {
   private _unsubscribeAll: Subject<void>;
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
     private _catalogService: CatalogService,
+    private router: Router,
+    public dialog: MatDialog,
   ) {
-    this.breakpointObserver.observe([
-      Breakpoints.HandsetLandscape,
-      Breakpoints.HandsetPortrait
-    ]).subscribe(result => {
-      if (result.matches) {
-        this.cols = 2;
-      } else {
-        this.cols = 5;
-      }
-    });
     this.imageUrl = environment.imageUrl
     this.movies = [];
     this.movieToSearch = '';
@@ -46,21 +43,98 @@ export class CatalogComponent implements OnInit {
   }
 
   getMovies() {
-    this._catalogService
-      .getMovies()
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((response: MovieResponse) => {
-        this.movies = response.results;
-      });
+    if (this.currentUser) {
+      this._catalogService
+        .getMoviesWithLocal()
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((response: MovieResponse) => {
+          this.movies = response.results;
+        });
+    } else {
+      this._catalogService
+        .getMovies()
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((response: MovieResponse) => {
+          this.movies = response.results;
+        });
+    }
   }
 
   searchMovie() {
+    if (this.currentUser) {
+      this._catalogService
+        .searchMovieWithLocal(this.movieToSearch)
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((response: MovieResponse) => {
+          this.movies = response.results;
+        });
+    } else {
+      this._catalogService
+        .searchMovie(this.movieToSearch)
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((response: MovieResponse) => {
+          this.movies = response.results;
+        });
+    }
+  }
+
+  likeMovie(id: number) {
+    if (!this.currentUser) {
+      this.router.navigate(['/login']);
+    }
+
     this._catalogService
-      .searchMovie(this.movieToSearch)
+      .likeMovie(id)
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((response: MovieResponse) => {
-        this.movies = response.results;
+      .subscribe((res: any) => {
+        const icon = document.getElementById(`movie-like-${id}`);
+        if (res.status === 'ACTIVE') {
+          icon?.classList.add('like');
+        } else {
+          icon?.classList.remove('like');
+        }
+
+        this.getMovies();
       });
+  }
+
+  rateMovie(id: number, rating: number) {
+    this._catalogService
+      .rateMovie(id, rating)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        this.getMovies();
+      });
+  }
+
+  writeANoteAboutMovie(id: number, note: string) {
+    this._catalogService
+      .writeNoteAboutMovie(id, note)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe(() => {
+        this.getMovies();
+      });
+  }
+
+  openDialog(rating: number, note: string, movieId: number): void {
+    if (!this.currentUser) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { rating, note },
+    });
+
+    dialogRef.afterClosed().subscribe((result: DialogData) => {
+      if (result?.rating) {
+        this.rateMovie(movieId, result.rating);
+      }
+
+      if (result?.note) {
+        this.writeANoteAboutMovie(movieId, result.note);
+      }
+    });
   }
 
   ngOnDestroy(): void {

@@ -28,20 +28,17 @@
         </p>
       </mat-card-content>
       <mat-card-actions class="sr--button-actions">
-        <button mat-button class="sr--favorite-movie">
+        <button mat-button class="sr--favorite-movie" [ngClass]="movie.isMyFavorite === 'ACTIVE' ? 'like' : null" [id]="'movie-like-' + movie.id" (click)="likeMovie(movie.id)">
           <mat-icon aria-hidden="false" aria-label="Like movie" fontIcon="favorite"></mat-icon>
         </button>
-        <button mat-button class="sr--rate-movie">
-          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
-          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
-          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
-          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
-          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+        <button mat-button class="sr--rate-movie" (click)="openDialog(movie.myRate, movie.myNotes, movie.id)">
+          <mat-icon class="sr--rate-star" [ngClass]="movie.myRate > 0 ? 'gold-star' : null" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" [ngClass]="movie.myRate > 2 ? 'gold-star' : null" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" [ngClass]="movie.myRate > 4 ? 'gold-star' : null" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" [ngClass]="movie.myRate > 6 ? 'gold-star' : null" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" [ngClass]="movie.myRate > 8 ? 'gold-star' : null" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
 </div>
-
-
-

@@ -1,0 +1,41 @@
+.sr--login-form-container {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 450px;
+
+  .sr--form-field {
+    background-color: transparent;
+    display: block;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 100%;
+
+    .mat-mdc-text-field-wrapper {
+      background-color: transparent;
+      border: 1px solid #7b1ea2;
+
+      .sr--form-label {
+        color: #000;
+      }
+
+      .sr--form-input {
+        color: #000;
+      }
+    }
+  }
+
+  .sr--form-submit {
+    border-color: #7b1ea2 !important;
+    width: 40%;
+
+    &:disabled {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}

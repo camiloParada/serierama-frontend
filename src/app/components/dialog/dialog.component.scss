@@ -1,0 +1,41 @@
+.mat-mdc-dialog-container {
+
+  .mat-mdc-dialog-surface {
+    background-color: #fff;
+
+    h1, p {
+      color: #000;
+    }
+
+    .sr--dialog-wrapper {
+
+
+      .sr--dialog-field-wrapper {
+        width: 100%;
+      }
+
+      .mat-mdc-text-field-wrapper {
+        background-color: transparent;
+        border: 1px solid #7b1ea2;
+
+        .sr--dialog-label {
+          color: #000;
+        }
+
+        .sr--dialog-input {
+          color: #000;
+        }
+      }
+    }
+
+    .sr--dialog-btn-wrapper {
+      justify-content: center;
+      margin-bottom: 20px;
+
+      .sr--dialog-btn {
+        border: 1px solid #54166e;
+        color: #000;
+      }
+    }
+  }
+}

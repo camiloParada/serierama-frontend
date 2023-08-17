@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
 .sr--header-title-wrapper {
   display: flex;
   justify-content: center;
   position: relative;
   width: 100%;
+
+  h1 {
+    cursor: pointer;
+    font-family: 'Pacifico', cursive !important;
+    font-size: 2.3rem !important;
+  }
 
   .sr--login-btn {
     background-color: transparent;
@@ -22,4 +30,17 @@
     background-color: #fff;
     color: #7b1fa2;
   }
+
+  .sr--user-panel {
+    & > span {
+      cursor: pointer;
+      font-size: 1rem;
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+.sr--panel-floating {
+  background-color: #7b1ea2 !important;
 }

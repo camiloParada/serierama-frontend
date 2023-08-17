@@ -104,13 +104,38 @@
     .sr--button-actions {
       justify-content: space-between;
 
+      .sr--favorite-movie {
+        &.like {
+          color: #f00;
+        }
+      }
+
       .sr--rate-movie {
         .sr--rate-star {
           color: #9e9e9e;
           margin: 0;
+
+          &.gold-star {
+            color: #ffd700;
+          }
         }
       }
     }
   }
 }
 
+
+@media only screen and (max-width: 768px) {
+  .rs--catalog-search {
+    margin: 30px 15px;
+  }
+
+  .rs--catalog-container {
+    .sr--card {
+      flex-wrap: wrap;
+      margin: 15px 20px;
+      max-height: 690px;
+      max-width: initial;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div class="" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutWrap fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.xs="100%">
+    <div class="sr--login-form-container" [formGroup]="formLogin">
+      <mat-form-field class="sr--form-field">
+        <mat-label class="sr--form-label">Enter your email</mat-label>
+        <input matInput class="sr--form-input" placeholder="pat@example.com" formControlName="email" required>
+        <mat-error *ngIf="formLogin.get('email')?.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="sr--form-field">
+        <mat-label class="sr--form-label">Enter your password</mat-label>
+        <input matInput class="sr--form-input" type="password" formControlName="password" required>
+        <mat-error *ngIf="formLogin.get('password')?.invalid">{{ getErrorMessage() }}</mat-error>
+      </mat-form-field>
+
+      <button mat-stroked-button class="sr--form-submit" color="primary" (click)="submit()" [disabled]="formLogin.invalid ? 'disabled' : null">
+        Login
+      </button>
+    </div>
+  </div>
+</div>
