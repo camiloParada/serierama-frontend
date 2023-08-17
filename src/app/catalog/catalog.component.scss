@@ -1,0 +1,116 @@
+.rs--catalog-search {
+  flex-wrap: wrap;
+  margin: 30px auto;
+  max-width: 1080px;
+
+  .sr--form-field {
+    background-color: transparent;
+    display: block;
+    margin: 0 auto;
+    max-width: 600px;
+    width: 100%;
+
+    .mat-mdc-text-field-wrapper {
+      background-color: transparent;
+      border: 1px solid #7b1ea2;
+
+      .sr--search-label {
+        color: #000;
+      }
+
+      .sr--search-input {
+        color: #000;
+      }
+    }
+  }
+}
+
+.rs--catalog-container {
+  flex-wrap: wrap;
+  margin: 30px auto;
+  max-width: 1080px;
+
+  .sr--card {
+    background-color: #7b1ea2;
+    margin: 15px 0;
+    max-height: 550px;
+    max-width: 250px;
+    transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.04);
+      -webkit-transform: scale(1.04);
+    }
+
+    .sr--card-header {
+      position: relative;
+
+      .sr--card-title {
+        color: #fff;
+        line-height: 1.1;
+        min-height: 80px;
+      }
+
+      .sr--card-release-date {
+        background-color: #00000080;
+        bottom: -22px;
+        color: #fff;
+        left: 0;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        z-index: 9;
+      }
+    }
+
+    .sr--badge-vote-average {
+      align-content: center;
+      background-color: #7b1ea2;
+      border-radius: 50%;
+      box-shadow: 0px 0px 5px 4px #ffffff61;
+      color: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      font-weight: bold;
+      height: 30px;
+      justify-content: center;
+      position: absolute;
+      right: 10px;
+      top: 130px;
+      width: 30px;
+      z-index: 9;
+    }
+
+    .sr--card-description {
+      background-color: #000000ba;
+      bottom: 50px;
+      color: #fff;
+      height: 0px;
+      overflow: scroll;
+      position: absolute;
+      transition: .3s ease-in-out;
+      -webkit-transition: .3s ease-in-out;
+
+      p {
+        padding: 15px 5px;
+      }
+    }
+
+    &:hover .sr--card-description {
+      height: 200px;
+    }
+
+    .sr--button-actions {
+      justify-content: space-between;
+
+      .sr--rate-movie {
+        .sr--rate-star {
+          color: #9e9e9e;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+

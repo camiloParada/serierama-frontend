@@ -1,0 +1,47 @@
+<div class="rs--catalog-search" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutWrap fxLayoutAlign="center">
+  <div fxFlex="100%" fxFlex.xs="100%">
+    <mat-form-field class="sr--form-field">
+      <mat-label class="sr--search-label">Search</mat-label>
+      <input matInput class="sr--search-input" type="text" [(ngModel)]="movieToSearch">
+      <button *ngIf="movieToSearch" matSuffix mat-icon-button aria-label="Clear" (click)="searchMovie()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</div>
+
+
+<div class="rs--catalog-container" fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px" fxLayoutWrap fxLayoutAlign="center">
+  <div fxFlex="20%" fxFlex.xs="50%" *ngFor="let movie of movies">
+    <mat-card class="sr--card">
+      <mat-card-header class="sr--card-header">
+        <mat-card-title class="sr--card-title">{{ movie.title }}</mat-card-title>
+        <mat-card-subtitle class="sr--card-release-date">{{ movie.releaseDate | date }}</mat-card-subtitle>
+      </mat-card-header>
+      <div class="sr--badge-vote-average">
+        {{ movie.voteAverage }}
+      </div>
+      <img mat-card-image [src]="imageUrl + '' + movie.poster" [alt]="'Poster movie' + movie.title">
+      <mat-card-content class="sr--card-description">
+        <p>
+          {{ movie.overview }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions class="sr--button-actions">
+        <button mat-button class="sr--favorite-movie">
+          <mat-icon aria-hidden="false" aria-label="Like movie" fontIcon="favorite"></mat-icon>
+        </button>
+        <button mat-button class="sr--rate-movie">
+          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+          <mat-icon class="sr--rate-star" aria-hidden="false" aria-label="Like movie" fontIcon="grade"></mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+
+

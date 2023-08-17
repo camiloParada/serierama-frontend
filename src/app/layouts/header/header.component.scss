@@ -1,0 +1,25 @@
+.sr--header-title-wrapper {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+
+  .sr--login-btn {
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    height: 30px;
+    position: absolute;
+    right: 0;
+    width: 110px;
+    transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+  }
+
+  .sr--login-btn:hover {
+    background-color: #fff;
+    color: #7b1fa2;
+  }
+}
